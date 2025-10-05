@@ -1,0 +1,1 @@
+Mukashev Sultanbek DAA assignment 2 Boyer-Moore Majority Vote
