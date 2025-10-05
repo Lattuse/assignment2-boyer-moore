@@ -6,7 +6,7 @@ public class BoyerMooreMajorityVote {
 
     public static Integer findMajorityElement(int[] nums, PerformanceTracker tracker) {
         if (nums == null || nums.length == 0) {
-            return Integer.MIN_VALUE;
+            return null;
         }
 
         tracker.incrementMemoryAllocations();
