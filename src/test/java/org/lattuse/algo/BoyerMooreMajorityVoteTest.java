@@ -6,13 +6,12 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class BoyerMooreMajorityVoteTest {
-
+    // fix edge cases here
     @Test
     void testEmptyArray() {
         PerformanceTracker tracker = new PerformanceTracker();
         assertNull(BoyerMooreMajorityVote.findMajorityElement(new int[]{}, tracker));
     }
-
     @Test
     void testSingleElement() {
         PerformanceTracker tracker = new PerformanceTracker();

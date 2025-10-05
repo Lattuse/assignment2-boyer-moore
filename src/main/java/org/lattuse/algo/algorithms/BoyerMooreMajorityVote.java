@@ -5,7 +5,9 @@ import org.lattuse.algo.metrics.PerformanceTracker;
 public class BoyerMooreMajorityVote {
 
     public static Integer findMajorityElement(int[] nums, PerformanceTracker tracker) {
-        if (nums == null || nums.length == 0) return null;
+        if (nums == null || nums.length == 0) {
+            return Integer.MIN_VALUE;
+        }
 
         tracker.incrementMemoryAllocations();
         int count = 0;
