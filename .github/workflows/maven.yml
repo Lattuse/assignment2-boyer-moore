@@ -26,11 +26,8 @@ jobs:
       - name: Build and Run Unit Tests
         run: mvn -B clean verify
 
-      - name: Package JMH benchmark jar
-        run: mvn -B package -DskipTests
-
       - name: Run JMH benchmarks
-        run: java -jar target/assignment2-boyer-moore-1.0.0-SNAPSHOT.jar
+        run: mvn -B jmh:run
 
       - name: Upload benchmark results
         if: success()
