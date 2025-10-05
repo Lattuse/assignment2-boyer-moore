@@ -68,6 +68,7 @@ public class PerformanceTracker {
         }
     }
 
+
     public void reset() {
         comparisons = 0;
         arrayAccesses = 0;
@@ -76,3 +77,4 @@ public class PerformanceTracker {
         endTime = 0;
     }
 }
+
