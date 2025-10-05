@@ -1,13 +1,16 @@
-name: Maven CI with Tests and Benchmarks for Boyer-Moore
+name: Java CI with JMH Benchmarks
 
 on:
   push:
-    branches: ["main", "feature/*"]
+    branches:
+      - main
+      - feature/*
   pull_request:
-    branches: ["main"]
+    branches:
+      - main
 
 jobs:
-  build-and-test:
+  build:
     runs-on: ubuntu-latest
 
     steps:
@@ -20,25 +23,20 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
-      - name: Cache Maven dependencies
-        uses: actions/cache@v4
-        with:
-          path: ~/.m2
-          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
-          restore-keys: |
-            ${{ runner.os }}-maven-
-
       - name: Build and Run Unit Tests
         run: mvn -B clean verify
 
-      - name: Run JMH Benchmarks
-        run: |
-          echo "Running JMH performance benchmarks..."
-          mvn clean install -DskipTests
-          java -jar target/benchmarks.jar -rf csv -rff benchmark-results.csv
+      - name: Package JMH benchmark jar
+        run: mvn -B package -DskipTests
 
-      - name: Upload Benchmark Results
+      - name: Run JMH benchmarks
+        run: java -jar target/benchmarks.jar -f 1 -wi 3 -i 5
+
+      - name: Upload benchmark results
+        if: success()
         uses: actions/upload-artifact@v4
         with:
-          name: benchmark-results
-          path: benchmark-results.csv
+          name: jmh-results
+          path: jmh-result*.json
+          if-no-files-found: ignore
+
