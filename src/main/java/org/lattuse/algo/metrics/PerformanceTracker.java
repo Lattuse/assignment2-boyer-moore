@@ -1,80 +1,46 @@
 package org.lattuse.algo.metrics;
 
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
-
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class PerformanceTracker {
 
-    private long comparisons = 0;
-    private long arrayAccesses = 0;
-    private long memoryAllocations = 0;
-    private long startTime;
-    private long endTime;
-
-    public void start() {
-        startTime = System.nanoTime();
-    }
-
-
-    public void stop() {
-        endTime = System.nanoTime();
-    }
-
-
-    public void incrementComparisons() {
-        comparisons++;
-    }
-
-    public void incrementArrayAccesses() {
-        arrayAccesses++;
-    }
-
-    public void incrementMemoryAllocations() {
-        memoryAllocations++;
-    }
-
-
-    public long getComparisons() {
-        return comparisons;
-    }
-
-    public long getArrayAccesses() {
-        return arrayAccesses;
-    }
-
-    public long getMemoryAllocations() {
-        return memoryAllocations;
-    }
-
-    public long getElapsedTime() {
-        return endTime - startTime;
-    }
-
-
-    public void exportToCSV(String filePath, String testName, int arraySize) {
-        try (PrintWriter writer = new PrintWriter(new FileWriter(filePath, true))) {
-            writer.printf("%s,%d,%d,%d,%d,%d%n",
-                    testName,
-                    arraySize,
-                    comparisons,
-                    arrayAccesses,
-                    memoryAllocations,
-                    (endTime - startTime)
-            );
-        } catch (IOException e) {
-            e.printStackTrace();
+    public static class Entry {
+        public final String label;
+        public final int n;
+        public final long bestNs;
+        public final long avgNs;
+        public final long worstNs;
+        public final Integer result;
+        public Entry(String label, int n, long bestNs, long avgNs, long worstNs, Integer result) {
+            this.label = label;
+            this.n = n;
+            this.bestNs = bestNs;
+            this.avgNs = avgNs;
+            this.worstNs = worstNs;
+            this.result = result;
         }
     }
 
+    private final List<Entry> entries = new ArrayList<>();
 
-    public void reset() {
-        comparisons = 0;
-        arrayAccesses = 0;
-        memoryAllocations = 0;
-        startTime = 0;
-        endTime = 0;
+    public void recordStats(String label, int n, long bestNs, long avgNs, long worstNs, Integer result) {
+        entries.add(new Entry(label, n, bestNs, avgNs, worstNs, result));
+    }
+
+    public String formatSummaryTable() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(String.format("%-36s %10s %12s %12s %12s %10s%n",
+                "Label", "n", "best(ms)", "avg(ms)", "worst(ms)", "result"));
+        sb.append(String.join("", Collections.nCopies(96, "-"))).append('\n');
+        for (Entry e : entries) {
+            sb.append(String.format("%-36s %10d %12.3f %12.3f %12.3f %10s%n",
+                    e.label, e.n, e.bestNs / 1_000_000.0, e.avgNs / 1_000_000.0, e.worstNs / 1_000_000.0,
+                    String.valueOf(e.result)));
+        }
+        return sb.toString();
     }
 }
+
 

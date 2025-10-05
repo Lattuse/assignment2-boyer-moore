@@ -3,37 +3,17 @@ package org.lattuse.algo.algorithms;
 import org.lattuse.algo.metrics.PerformanceTracker;
 
 public class BoyerMooreMajorityVote {
-
-    public static Integer findMajorityElement(int[] nums, PerformanceTracker tracker) {
-        if (nums == null || nums.length == 0) {
-            return null;
+    public Integer findMajorityElement(int[] nums) {
+        if (nums == null || nums.length == 0) return null;
+        int candidate = 0, count = 0;
+        for (int x : nums) {
+            if (count == 0) candidate = x;
+            count += (x == candidate) ? 1 : -1;
         }
-
-        tracker.incrementMemoryAllocations();
-        int count = 0;
-        Integer candidate = null;
-
-        tracker.start();
-
-        for (int num : nums) {
-            tracker.incrementArrayAccesses();
-            if (count == 0) {
-                candidate = num;
-                tracker.incrementMemoryAllocations();
-            }
-            tracker.incrementComparisons();
-            count += (num == candidate) ? 1 : -1;
-        }
-
-        tracker.stop();
-
-        int frequency = 0;
-        for (int num : nums) {
-            tracker.incrementArrayAccesses();
-            if (num == candidate) frequency++;
-        }
-
-        return (frequency > nums.length / 2) ? candidate : null;
+        int freq = 0;
+        for (int x : nums) if (x == candidate) freq++;
+        return (freq > nums.length / 2) ? candidate : null;
     }
 }
+
 
