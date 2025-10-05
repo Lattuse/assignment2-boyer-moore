@@ -30,7 +30,7 @@ jobs:
         run: mvn -B package -DskipTests
 
       - name: Run JMH benchmarks
-        run: java -jar $(ls target | grep '.jar$' | head -n 1)
+        run: java -jar target/assignment2-boyer-moore-1.0.0-SNAPSHOT.jar
 
       - name: Upload benchmark results
         if: success()
