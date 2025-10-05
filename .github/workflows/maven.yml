@@ -27,7 +27,7 @@ jobs:
         run: mvn -B clean verify
 
       - name: Run JMH benchmarks
-        run: mvn -B jmh:run
+        run: mvn -B -DskipTests=true clean test-compile exec:java@run-jmh
 
       - name: Upload benchmark results
         if: success()
