@@ -1,8 +1,10 @@
 package org.lattuse.algo.metrics;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 
 public class PerformanceTracker {
 
@@ -33,7 +35,7 @@ public class PerformanceTracker {
         StringBuilder sb = new StringBuilder();
         sb.append(String.format("%-36s %10s %12s %12s %12s %10s%n",
                 "Label", "n", "best(ms)", "avg(ms)", "worst(ms)", "result"));
-        sb.append(String.join("", Collections.nCopies(96, "-"))).append('\n');
+        sb.append("--------------------------------------------------------------------------------\n");
         for (Entry e : entries) {
             sb.append(String.format("%-36s %10d %12.3f %12.3f %12.3f %10s%n",
                     e.label, e.n, e.bestNs / 1_000_000.0, e.avgNs / 1_000_000.0, e.worstNs / 1_000_000.0,
@@ -41,6 +43,24 @@ public class PerformanceTracker {
         }
         return sb.toString();
     }
+
+    public void saveCsv(String filename) throws IOException {
+        try (FileWriter writer = new FileWriter(filename)) {
+            writer.write("Label,n,best_ms,avg_ms,worst_ms,result\n");
+            for (Entry e : entries) {
+                writer.write(String.format(Locale.US,
+                        "%s,%d,%.3f,%.3f,%.3f,%s\n",
+                        e.label, e.n,
+                        e.bestNs / 1_000_000.0,
+                        e.avgNs / 1_000_000.0,
+                        e.worstNs / 1_000_000.0,
+                        e.result == null ? "" : e.result.toString()
+                ));
+            }
+        }
+    }
 }
+
+
 
 

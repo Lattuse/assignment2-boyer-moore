@@ -1,0 +1,13 @@
+Label,n,best_ms,avg_ms,worst_ms,result
+Comprehensive_NoMajority_n1000,1000,0.044,0.045,0.053,
+Comprehensive_WithMajority_n1000,1000,0.046,0.047,0.053,320
+Comprehensive_NoMajority_n200800,200800,0.162,0.667,1.607,
+Comprehensive_WithMajority_n200800,200800,0.686,0.723,0.784,-75
+Comprehensive_NoMajority_n400600,400600,0.263,0.271,0.312,
+Comprehensive_WithMajority_n400600,400600,1.394,1.428,1.610,995
+Comprehensive_NoMajority_n600400,600400,0.395,0.399,0.418,
+Comprehensive_WithMajority_n600400,600400,2.098,2.144,2.381,58
+Comprehensive_NoMajority_n800200,800200,0.526,0.530,0.538,
+Comprehensive_WithMajority_n800200,800200,2.795,2.812,2.862,710
+Comprehensive_NoMajority_n1000000,1000000,0.657,0.673,0.696,
+Comprehensive_WithMajority_n1000000,1000000,3.492,3.536,3.765,339

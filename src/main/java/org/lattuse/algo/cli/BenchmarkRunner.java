@@ -12,6 +12,8 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
 
+import java.io.IOException;
+
 public class BenchmarkRunner {
 
     private static final Scanner SC = new Scanner(System.in);
@@ -151,6 +153,12 @@ public class BenchmarkRunner {
     private static void menuViewResults() {
         System.out.println("=== Benchmark Results ===");
         System.out.print(TRACKER.formatSummaryTable());
+        try {
+            TRACKER.saveCsv("benchmark_results.csv");
+            System.out.println("Results saved to benchmark_results.csv");
+        } catch (IOException e) {
+            System.err.println("Failed to save CSV: " + e.getMessage());
+        }
     }
 
     public static void main(String[] args) {
@@ -179,6 +187,5 @@ public class BenchmarkRunner {
         }
     }
 }
-
 
 
