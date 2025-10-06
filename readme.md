@@ -33,21 +33,10 @@ Second scan: Count occurrences of candidate and verify majority.
 
 This approach guarantees:
 
-Time Complexity:
-O
-(
-n
-)
-O(n)
+Time Complexity: O(n)
 
-Space Complexity:
-O
-(
-1
-)
-O(1)
+Space Complexity: O(1)
 
-Learn more: Wikipedia
 
 ## Usage
 1. Build and Run Benchmarks (Java)
