@@ -15,8 +15,8 @@ public class PerformanceTracker {
         public final long bestNs;
         public final long avgNs;
         public final long worstNs;
-        public final Integer result;
-        public Entry(String label, int n, long bestNs, long avgNs, long worstNs, Integer result) {
+        public final OptionalInt result;
+        public Entry(String label, int n, long bestNs, long avgNs, long worstNs, OptionalInt result) {
             this.label = label;
             this.n = n;
             this.bestNs = bestNs;
