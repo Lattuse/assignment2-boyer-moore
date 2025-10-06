@@ -27,7 +27,7 @@ plt.title("Boyer-Moore Majority Vote Benchmark")
 plt.legend()
 plt.grid(True)
 plt.tight_layout()
-plt.savefig("plots/graph.png")
+plt.savefig("docs/performance-plots/graphi.png")
 plt.show()
 
 
