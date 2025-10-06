@@ -51,7 +51,7 @@ Select "View benchmark results" in the menu to automatically export CSV.
    Exported CSV (default: benchmark_results.csv) can be visualized using the included Python script with matplotlib and pandas.
 
 Benchmark plot:
-![graph.png](plots/graph.png)
+![graph.png](docs/performance-plots/graphi.png)
 
 The provided benchmarks confirm strict linear time scaling and validate all theoretical predictions.
 
