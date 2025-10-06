@@ -74,7 +74,7 @@ public class BenchmarkRunner {
     private static void runRepeated(String label, int[] arr, int repeats) {
         BoyerMooreMajorityVote algo = new BoyerMooreMajorityVote();
         long best = Long.MAX_VALUE, worst = Long.MIN_VALUE, total = 0L;
-        Integer last = null;
+        OptionalInt last = null;
         for (int i = 0; i < repeats; i++) {
             long t0 = System.nanoTime();
             last = algo.findMajorityElement(arr);

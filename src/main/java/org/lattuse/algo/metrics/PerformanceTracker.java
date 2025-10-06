@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.OptionalInt;
 
 public class PerformanceTracker {
 
@@ -27,7 +28,7 @@ public class PerformanceTracker {
 
     private final List<Entry> entries = new ArrayList<>();
 
-    public void recordStats(String label, int n, long bestNs, long avgNs, long worstNs, Integer result) {
+    public void recordStats(String label, int n, long bestNs, long avgNs, long worstNs, OptionalInt result) {
         entries.add(new Entry(label, n, bestNs, avgNs, worstNs, result));
     }
 
